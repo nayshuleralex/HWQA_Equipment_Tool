@@ -1,0 +1,11 @@
+{
+    "manufacturer": "Intel",
+    "model": "Xeon E5-1650V4",
+    "platform": "odsls",
+    "frequency": 3.5,
+    "amount": 10,
+    "ecr": "123",
+    "alteonApproval": "APPROVED",
+    "dpApproval": "APPROVED",
+    "hwqaApproval": "APPROVED"
+}
