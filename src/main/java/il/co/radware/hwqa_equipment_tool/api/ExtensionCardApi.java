@@ -31,12 +31,12 @@ public class ExtensionCardApi {
     }
 
     @GetMapping("/?manufacturer={manufacturer}")
-    public List<ExtensionCard> getAllDrivesByManufacturer(@PathVariable String manufacturer) {
+    public List<ExtensionCard> getAllExtensionCardsByManufacturer(@PathVariable String manufacturer) {
         return this.cardController.getAllCardsByManufacturer(manufacturer);
     }
 
     @GetMapping("/?ecr={ecr}")
-    public List<ExtensionCard> getAllDrivesByEcr(@PathVariable String ecr) {
+    public List<ExtensionCard> getAllExtensionCardsByEcr(@PathVariable String ecr) {
         return this.cardController.getAllCardsByEcr(ecr);
     }
 

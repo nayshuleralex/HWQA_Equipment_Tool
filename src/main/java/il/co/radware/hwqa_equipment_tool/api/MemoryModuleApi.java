@@ -30,12 +30,12 @@ public class MemoryModuleApi {
     }
 
     @GetMapping("/?manufacturer={manufacturer}")
-    public List<MemoryModule> getAllDrivesByManufacturer(@PathVariable String manufacturer) {
+    public List<MemoryModule> getAllMemoryModulesByManufacturer(@PathVariable String manufacturer) {
         return this.memoryController.getAllMemoriesByManufacturer(manufacturer);
     }
 
     @GetMapping("/?ecr={ecr}")
-    public List<MemoryModule> getAllDrivesByEcr(@PathVariable String ecr) {
+    public List<MemoryModule> getAllMemoryModulesByEcr(@PathVariable String ecr) {
         return this.memoryController.getAllMemoriesByEcr(ecr);
     }
 

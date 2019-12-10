@@ -29,12 +29,12 @@ public class ProcessorUnitApi {
     }
 
     @GetMapping("/?manufacturer={manufacturer}")
-    public List<ProcessorUnit> getAllDrivesByManufacturer(@PathVariable String manufacturer) {
+    public List<ProcessorUnit> getAllProcessorUnitsByManufacturer(@PathVariable String manufacturer) {
         return this.processorController.getAllProcessorUnitsByManufacturer(manufacturer);
     }
 
     @GetMapping("/?ecr={ecr}")
-    public List<ProcessorUnit> getAllDrivesByEcr(@PathVariable String ecr) {
+    public List<ProcessorUnit> getAllProcessorUnitsByEcr(@PathVariable String ecr) {
         return this.processorController.getAllProcessorUnitsByEcr(ecr);
     }
 

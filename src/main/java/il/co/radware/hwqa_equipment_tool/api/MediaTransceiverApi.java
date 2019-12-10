@@ -30,12 +30,12 @@ public class MediaTransceiverApi {
     }
 
     @GetMapping("/?manufacturer={manufacturer}")
-    public List<MediaTransceiver> getAllDrivesByManufacturer(@PathVariable String manufacturer) {
+    public List<MediaTransceiver> getAllMediaTransceiversByManufacturer(@PathVariable String manufacturer) {
         return this.transceiversController.getAllTransceiversByManufacturer(manufacturer);
     }
 
     @GetMapping("/?ecr={ecr}")
-    public List<MediaTransceiver> getAllDrivesByEcr(@PathVariable String ecr) {
+    public List<MediaTransceiver> getAllMediaTransceiversByEcr(@PathVariable String ecr) {
         return this.transceiversController.getAllTransceiversByEcr(ecr);
     }
 

@@ -17,6 +17,7 @@
       <w>qsfp</w>
       <w>rdimm</w>
       <w>sata</w>
+      <w>satadom</w>
       <w>udimm</w>
     </words>
   </dictionary>

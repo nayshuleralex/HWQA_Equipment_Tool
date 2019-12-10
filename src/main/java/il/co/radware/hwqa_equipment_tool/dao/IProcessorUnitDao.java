@@ -17,4 +17,5 @@ public interface IProcessorUnitDao extends CrudRepository<ProcessorUnit, Long> {
 
     @Query("SELECT p FROM MediaTransceiver p WHERE p.ecr = :ecr")
     List<ProcessorUnit> findAllByEcr(@Param("ecr") String ecr);
+
 }

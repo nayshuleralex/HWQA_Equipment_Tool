@@ -21,6 +21,10 @@ public class ProcessorUnitController {
         return this.processorUnitDao.findById(id).get();
     }
 
+    public ProcessorUnit getProcessorUnitByModel(String cpuModel) {
+        return this.processorUnitDao.findByModel(cpuModel);
+    }
+
     public List<ProcessorUnit> getAllProcessorUnits() {
         return (List<ProcessorUnit>) this.processorUnitDao.findAll();
     }

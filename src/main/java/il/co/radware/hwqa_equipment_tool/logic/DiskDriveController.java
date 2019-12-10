@@ -29,6 +29,10 @@ public class DiskDriveController {
         this.diskDriveDao.save(drive);
     }
 
+    public DiskDrive getDriveByModel(String driveModel) {
+        return this.diskDriveDao.findByModel(driveModel);
+    }
+
     public void deleteDrive(long id) {
         this.diskDriveDao.deleteById(id);
     }

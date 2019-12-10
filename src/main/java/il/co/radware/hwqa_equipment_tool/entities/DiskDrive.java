@@ -6,9 +6,10 @@ import il.co.radware.hwqa_equipment_tool.enums.drive.DriveType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "DiskDrives")
+@Table(name = "DISK_DRIVES")
 public class DiskDrive implements Serializable {
     @Id
     @GeneratedValue
@@ -24,10 +25,6 @@ public class DiskDrive implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "CAPACITY", nullable = false)
     private DriveCapacity capacity;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "DRIVE_TYPE", nullable = false)
-    private DriveType type;
 
     @Column(name = "AMOUNT", nullable = false)
     private int amount;
@@ -47,29 +44,31 @@ public class DiskDrive implements Serializable {
     @Column(name = "HWQA_APPROVAL", nullable = false)
     private Approval hwqaApproval;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "diskDrive")
+    private List<Device> devices;
+
     public DiskDrive() {
     }
 
-    public DiskDrive(String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount, String ecr) {
+    public DiskDrive(String manufacturer, String model, DriveCapacity capacity, int amount, String ecr) {
         this.manufacturer = manufacturer;
         this.model = model;
         this.capacity = capacity;
-        this.type = type;
         this.amount = amount;
         this.ecr = ecr;
     }
 
-    public DiskDrive(String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount, String ecr,
+    public DiskDrive(String manufacturer, String model, DriveCapacity capacity, int amount, String ecr,
                      Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, capacity, type, amount, ecr);
+        this(manufacturer, model, capacity, amount, ecr);
         this.alteonApproval = alteonApproval;
         this.dpApproval = dpApproval;
         this.hwqaApproval = hwqaApproval;
     }
 
-    public DiskDrive(Long id, String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount,
+    public DiskDrive(Long id, String manufacturer, String model, DriveCapacity capacity, int amount,
                      String ecr, Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, capacity, type, amount, ecr, alteonApproval, dpApproval, hwqaApproval);
+        this(manufacturer, model, capacity, amount, ecr, alteonApproval, dpApproval, hwqaApproval);
         this.id = id;
     }
 
@@ -103,14 +102,6 @@ public class DiskDrive implements Serializable {
 
     public void setCapacity(DriveCapacity capacity) {
         this.capacity = capacity;
-    }
-
-    public DriveType getType() {
-        return type;
-    }
-
-    public void setType(DriveType type) {
-        this.type = type;
     }
 
     public int getAmount() {
@@ -151,5 +142,13 @@ public class DiskDrive implements Serializable {
 
     public void setHwqaApproval(Approval hwqaApproval) {
         this.hwqaApproval = hwqaApproval;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 }

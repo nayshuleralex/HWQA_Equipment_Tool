@@ -1,14 +1,16 @@
 package il.co.radware.hwqa_equipment_tool.entities;
 
 import il.co.radware.hwqa_equipment_tool.enums.Approval;
-import il.co.radware.hwqa_equipment_tool.enums.psu.PsuType;
+import il.co.radware.hwqa_equipment_tool.enums.drive.DriveCapacity;
+import il.co.radware.hwqa_equipment_tool.enums.drive.DriveType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "PSUs")
-public class PowerSupply implements Serializable {
+@Table(name = "SATA_FLASHES")
+public class SataFlash implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "ID")
@@ -21,8 +23,12 @@ public class PowerSupply implements Serializable {
     private String model;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE", nullable = false)
-    private PsuType type;
+    @Column(name = "CAPACITY", nullable = false)
+    private DriveCapacity capacity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "DRIVE_TYPE", nullable = false)
+    private DriveType type;
 
     @Column(name = "AMOUNT", nullable = false)
     private int amount;
@@ -42,29 +48,33 @@ public class PowerSupply implements Serializable {
     @Column(name = "HWQA_APPROVAL", nullable = false)
     private Approval hwqaApproval;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sataFlash")
+    private List<Device> devices;
 
-    public PowerSupply() {
+    public SataFlash() {
     }
 
-    public PowerSupply(String manufacturer, String model, PsuType type, int amount, String ecr) {
+    public SataFlash(String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount, String ecr) {
         this.manufacturer = manufacturer;
         this.model = model;
+        this.capacity = capacity;
         this.type = type;
         this.amount = amount;
         this.ecr = ecr;
     }
 
-    public PowerSupply(String manufacturer, String model, PsuType type, int amount, String ecr,
-                       Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, type, amount, ecr);
+    public SataFlash(String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount,
+                     String ecr, Approval alteonApproval, Approval dpApproval, Approval hwqaApproval, List<Device> devices) {
+        this(manufacturer, model, capacity, type, amount, ecr);
         this.alteonApproval = alteonApproval;
         this.dpApproval = dpApproval;
         this.hwqaApproval = hwqaApproval;
+        this.devices = devices;
     }
 
-    public PowerSupply(Long id, String manufacturer, String model, PsuType type, int amount, String ecr,
-                       Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, type, amount, ecr, alteonApproval, dpApproval, hwqaApproval);
+    public SataFlash(Long id, String manufacturer, String model, DriveCapacity capacity, DriveType type, int amount,
+                     String ecr, Approval alteonApproval, Approval dpApproval, Approval hwqaApproval, List<Device> devices) {
+        this(manufacturer, model, capacity, type, amount, ecr, alteonApproval, dpApproval, hwqaApproval, devices);
         this.id = id;
     }
 
@@ -92,11 +102,19 @@ public class PowerSupply implements Serializable {
         this.model = model;
     }
 
-    public PsuType getType() {
+    public DriveCapacity getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(DriveCapacity capacity) {
+        this.capacity = capacity;
+    }
+
+    public DriveType getType() {
         return type;
     }
 
-    public void setType(PsuType type) {
+    public void setType(DriveType type) {
         this.type = type;
     }
 
@@ -138,5 +156,13 @@ public class PowerSupply implements Serializable {
 
     public void setHwqaApproval(Approval hwqaApproval) {
         this.hwqaApproval = hwqaApproval;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 }

@@ -5,9 +5,10 @@ import il.co.radware.hwqa_equipment_tool.enums.Platform;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "CPUs")
+@Table(name = "CPUS")
 public class ProcessorUnit implements Serializable {
     @Id
     @GeneratedValue
@@ -44,6 +45,9 @@ public class ProcessorUnit implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "HWQA_APPROVAL", nullable = false)
     private Approval hwqaApproval;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "diskDrive")
+    private List<Device> devices;
 
     public ProcessorUnit() {
     }
@@ -98,20 +102,20 @@ public class ProcessorUnit implements Serializable {
         this.model = model;
     }
 
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
     public float getFrequency() {
         return frequency;
     }
 
     public void setFrequency(float frequency) {
         this.frequency = frequency;
-    }
-
-    public Platform getRamType() {
-        return platform;
-    }
-
-    public void setRamType(Platform platform) {
-        this.platform = platform;
     }
 
     public int getAmount() {
@@ -154,4 +158,11 @@ public class ProcessorUnit implements Serializable {
         this.hwqaApproval = hwqaApproval;
     }
 
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
+    }
 }

@@ -5,9 +5,10 @@ import il.co.radware.hwqa_equipment_tool.enums.card.CardType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "ExtensionCards")
+@Table(name = "EXT_CARDS")
 public class ExtensionCard implements Serializable {
 
     @Id
@@ -42,6 +43,9 @@ public class ExtensionCard implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "HWQA_APPROVAL", nullable = false)
     private Approval hwqaApproval;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sslCard")
+    private List<Device> devices;
 
     public ExtensionCard() {
     }
@@ -138,5 +142,13 @@ public class ExtensionCard implements Serializable {
 
     public void setHwqaApproval(Approval hwqaApproval) {
         this.hwqaApproval = hwqaApproval;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 }

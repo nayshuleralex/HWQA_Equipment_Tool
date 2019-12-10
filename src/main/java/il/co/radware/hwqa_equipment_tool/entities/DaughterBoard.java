@@ -1,16 +1,16 @@
 package il.co.radware.hwqa_equipment_tool.entities;
 
 import il.co.radware.hwqa_equipment_tool.enums.Approval;
-import il.co.radware.hwqa_equipment_tool.enums.ram.RamSize;
-import il.co.radware.hwqa_equipment_tool.enums.ram.RamType;
+import il.co.radware.hwqa_equipment_tool.enums.card.DaughterBoardType;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "RAMS")
-public class MemoryModule implements Serializable {
+@Table(name = "DAUGHTER_BOARDS")
+public class DaughterBoard implements Serializable {
+
     @Id
     @GeneratedValue
     @Column(name = "ID")
@@ -23,12 +23,8 @@ public class MemoryModule implements Serializable {
     private String model;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "RAM_SIZE", nullable = false)
-    private RamSize size;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "RAM_TYPE", nullable = false)
-    private RamType ramType;
+    @Column(name = "DAUGHTER_BOARD_TYPE", nullable = false)
+    private DaughterBoardType type;
 
     @Column(name = "AMOUNT", nullable = false)
     private int amount;
@@ -48,35 +44,31 @@ public class MemoryModule implements Serializable {
     @Column(name = "HWQA_APPROVAL", nullable = false)
     private Approval hwqaApproval;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "diskDrive")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "daughterBoard")
     private List<Device> devices;
 
-    public MemoryModule() {
+    public DaughterBoard() {
     }
 
-    public MemoryModule(String manufacturer, String model, RamSize size, RamType ramType, int amount, String ecr) {
+    public DaughterBoard(String manufacturer, String model, DaughterBoardType type, int amount, String ecr) {
         this.manufacturer = manufacturer;
         this.model = model;
-        this.size = size;
-        this.ramType = ramType;
+        this.type = type;
         this.amount = amount;
         this.ecr = ecr;
-        this.alteonApproval = Approval.IRRELEVANT;
-        this.dpApproval = Approval.IRRELEVANT;
-        this.hwqaApproval = Approval.NOT_APPROVED;
     }
 
-    public MemoryModule(String manufacturer, String model, RamSize size, RamType ramType, int amount, String ecr,
-                        Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, size, ramType, amount, ecr);
+    public DaughterBoard(String manufacturer, String model, DaughterBoardType type, int amount, String ecr,
+                         Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
+        this(manufacturer, model, type, amount, ecr);
         this.alteonApproval = alteonApproval;
         this.dpApproval = dpApproval;
         this.hwqaApproval = hwqaApproval;
     }
 
-    public MemoryModule(Long id, String manufacturer, String model, RamSize size, RamType ramType, int amount,
-                        String ecr, Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
-        this(manufacturer, model, size, ramType, amount, ecr, alteonApproval, dpApproval, hwqaApproval);
+    public DaughterBoard(Long id, String manufacturer, String model, DaughterBoardType type, int amount, String ecr,
+                         Approval alteonApproval, Approval dpApproval, Approval hwqaApproval) {
+        this(manufacturer, model, type, amount, ecr, alteonApproval, dpApproval, hwqaApproval);
         this.id = id;
     }
 
@@ -104,20 +96,12 @@ public class MemoryModule implements Serializable {
         this.model = model;
     }
 
-    public RamSize getSize() {
-        return size;
+    public DaughterBoardType getType() {
+        return type;
     }
 
-    public void setSize(RamSize size) {
-        this.size = size;
-    }
-
-    public RamType getRamType() {
-        return ramType;
-    }
-
-    public void setRamType(RamType ramType) {
-        this.ramType = ramType;
+    public void setType(DaughterBoardType type) {
+        this.type = type;
     }
 
     public int getAmount() {

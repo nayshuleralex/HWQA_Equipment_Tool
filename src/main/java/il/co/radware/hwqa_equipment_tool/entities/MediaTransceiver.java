@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "MediaTransceivers")
+@Table(name = "MEDIA_TRANSCEIVERS")
 public class MediaTransceiver implements Serializable {
     @Id
     @GeneratedValue

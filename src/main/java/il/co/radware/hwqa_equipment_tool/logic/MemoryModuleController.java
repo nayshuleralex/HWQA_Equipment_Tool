@@ -21,6 +21,10 @@ public class MemoryModuleController {
         return this.memoryModuleDao.findById(id).get();
     }
 
+    public MemoryModule getMemoryByModel(String memoryModel) {
+        return this.memoryModuleDao.findByModel(memoryModel);
+    }
+
     public List<MemoryModule> getAllMemories() {
         return (List<MemoryModule>) this.memoryModuleDao.findAll();
     }
