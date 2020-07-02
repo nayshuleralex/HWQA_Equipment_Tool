@@ -15,7 +15,7 @@ public class DaughterBoardApi {
     private DaughterBoardController daughterBoardController;
 
     @PostMapping
-    public Long createDaughterBoard(@RequestBody DaughterBoard daughterBoard) {
+    public long createDaughterBoard(@RequestBody DaughterBoard daughterBoard) {
         return this.daughterBoardController.createDaughterBoard(daughterBoard);
     }
 

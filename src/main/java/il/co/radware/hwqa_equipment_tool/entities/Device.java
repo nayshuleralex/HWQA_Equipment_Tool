@@ -4,10 +4,11 @@ package il.co.radware.hwqa_equipment_tool.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "DEVICES")
-public class Device {
+public class Device implements Serializable {
 
     @Id
     @GeneratedValue
